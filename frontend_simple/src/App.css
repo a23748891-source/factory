@@ -1,0 +1,32 @@
+.app {
+  min-height: 100vh;
+  background-color: #F3F4F9;
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  font-size: 1.3rem;
+  color: #7369AB;
+  font-weight: 500;
+}
+
+/* 애니메이션 효과 */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.auth-container,
+.home-container {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
