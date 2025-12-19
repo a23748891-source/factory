@@ -1,0 +1,265 @@
+.main-container {
+  min-height: calc(100vh - 80px);
+  background-color: var(--bg-primary);
+  padding-bottom: 60px;
+  transition: background-color 0.3s;
+}
+
+/* Hero Section */
+.hero-section {
+  background: linear-gradient(135deg, #ED4B5E 0%, #ff6678 100%);
+  color: white;
+  padding: 80px 50px;
+  text-align: center;
+}
+
+.hero-title {
+  font-size: 3rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+  animation: fadeInDown 0.8s ease-out;
+}
+
+.hero-subtitle {
+  font-size: 1.3rem;
+  margin-bottom: 50px;
+  opacity: 0.95;
+  animation: fadeInUp 0.8s ease-out;
+}
+
+.hero-stats {
+  display: flex;
+  justify-content: center;
+  gap: 60px;
+  margin-top: 40px;
+  animation: fadeIn 1s ease-out;
+}
+
+.stat-item {
+  text-align: center;
+}
+
+.stat-number {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.stat-label {
+  font-size: 1rem;
+  opacity: 0.9;
+}
+
+/* Zones Section */
+.zones-section {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 60px 50px;
+}
+
+.section-title {
+  font-size: 2rem;
+  color: var(--accent-red);
+  margin-bottom: 40px;
+  text-align: center;
+  font-weight: 600;
+}
+
+.zones-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 30px;
+}
+
+.zone-card {
+  background: var(--card-bg);
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 0 20px var(--shadow);
+  transition: all 0.3s;
+  border: 3px solid transparent;
+}
+
+.zone-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 30px var(--shadow);
+}
+
+.zone-safe {
+  border-color: #4CAF50;
+}
+
+.zone-alert {
+  border-color: #ED4B5E;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+.zone-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.zone-name {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.status-indicator {
+  font-size: 2rem;
+}
+
+.zone-area {
+  color: #7369AB;
+  font-size: 1rem;
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+
+.zone-status {
+  margin-top: 20px;
+  padding: 16px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.safe-message {
+  color: #4CAF50;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.alert-message {
+  color: #ED4B5E;
+  font-weight: 600;
+}
+
+.alert-message strong {
+  display: block;
+  font-size: 1.2rem;
+  margin-bottom: 8px;
+}
+
+.detection-time {
+  margin-top: 8px;
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+/* Info Section */
+.info-section {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 40px 50px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+}
+
+.info-card {
+  background: var(--card-bg);
+  border-radius: 12px;
+  padding: 40px;
+  box-shadow: 0 0 20px var(--shadow);
+  text-align: center;
+  transition: transform 0.3s;
+}
+
+.info-card:hover {
+  transform: translateY(-5px);
+}
+
+.info-card h3 {
+  font-size: 1.5rem;
+  color: var(--accent-red);
+  margin-bottom: 16px;
+  font-weight: 600;
+}
+
+.info-card p {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/* 애니메이션 */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(237, 75, 94, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(237, 75, 94, 0.6);
+  }
+}
+
+/* 반응형 */
+@media (max-width: 768px) {
+  .hero-section {
+    padding: 50px 30px;
+  }
+
+  .hero-title {
+    font-size: 2rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1.1rem;
+  }
+
+  .hero-stats {
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .zones-section {
+    padding: 40px 20px;
+  }
+
+  .section-title {
+    font-size: 1.6rem;
+  }
+
+  .zones-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .info-section {
+    padding: 30px 20px;
+    grid-template-columns: 1fr;
+  }
+}
+

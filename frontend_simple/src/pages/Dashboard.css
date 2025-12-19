@@ -1,0 +1,417 @@
+.dashboard-container {
+  min-height: calc(100vh - 80px);
+  background: var(--gradient-primary);
+  padding: 40px 20px;
+  transition: background 0.3s;
+}
+
+.dashboard-container .loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 80px);
+  font-size: 1.5rem;
+  color: white;
+  font-weight: 500;
+}
+
+.dashboard-header {
+  text-align: center;
+  color: white;
+  margin-bottom: 40px;
+}
+
+.dashboard-header h1 {
+  font-size: 2.5rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.dashboard-subtitle {
+  font-size: 1.1rem;
+  opacity: 0.9;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 30px;
+  max-width: 1400px;
+  margin: 0 auto 40px;
+}
+
+.status-card {
+  background: var(--card-bg);
+  border-radius: 16px;
+  padding: 30px;
+  box-shadow: 0 10px 30px var(--card-shadow);
+  transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
+}
+
+.status-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px var(--card-shadow);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+  padding-bottom: 15px;
+  border-bottom: 2px solid #f0f0f0;
+}
+
+.card-header h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.status-badge {
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.status-badge.active {
+  background-color: #4caf50;
+  color: white;
+}
+
+.status-badge.inactive {
+  background-color: #f44336;
+  color: white;
+}
+
+.status-badge.running {
+  background-color: #2196f3;
+  color: white;
+}
+
+.card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.device-info {
+  padding: 12px;
+  background-color: var(--bg-primary);
+  border-radius: 8px;
+  transition: background-color 0.3s;
+}
+
+/* 마이크 카드 스타일 */
+.device-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px;
+  background-color: var(--bg-primary);
+  border-radius: 8px;
+  transition: background-color 0.3s;
+}
+
+.device-label {
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.device-name {
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.level-meter {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.level-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.level-label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.level-bar-container {
+  position: relative;
+  width: 100%;
+  height: 30px;
+  background-color: var(--border-color);
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+.level-bar {
+  height: 100%;
+  border-radius: 15px;
+  transition: width 0.3s ease;
+  position: relative;
+}
+
+.input-bar {
+  background: linear-gradient(90deg, #4caf50, #8bc34a);
+}
+
+.output-bar {
+  background: linear-gradient(90deg, #2196f3, #03a9f4);
+}
+
+.level-value {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-weight: 600;
+  color: var(--text-primary);
+  font-size: 0.9rem;
+}
+
+/* 스피커 카드 스타일 */
+.speaker-card {
+  /* 마이크 카드와 동일한 스타일 사용 */
+}
+
+/* AI 카드 스타일 */
+.ai-metrics {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.metric-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.metric-label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.metric-value {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.metric-value.large {
+  font-size: 2rem;
+  color: #2196f3;
+}
+
+/* PC 카드 스타일 */
+.pc-metrics {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.metric-row {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.metric-bar-container {
+  position: relative;
+  width: 100%;
+  height: 25px;
+  background-color: var(--border-color);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.metric-bar {
+  height: 100%;
+  border-radius: 12px;
+  transition: width 0.3s ease;
+}
+
+.cpu-bar {
+  background: linear-gradient(90deg, #ff9800, #ff5722);
+}
+
+.memory-bar {
+  background: linear-gradient(90deg, #9c27b0, #e91e63);
+}
+
+.disk-bar {
+  background: linear-gradient(90deg, #00bcd4, #009688);
+}
+
+.metric-percentage {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-weight: 600;
+  color: var(--text-primary);
+  font-size: 0.85rem;
+}
+
+.uptime-info {
+  margin-top: 10px;
+  padding: 12px;
+  background-color: var(--bg-primary);
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background-color 0.3s;
+}
+
+.uptime-label {
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.uptime-value {
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+/* 시스템 정보 */
+.system-info {
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px solid #f0f0f0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+}
+
+.info-label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.info-value {
+  font-size: 0.9rem;
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+/* 상태 표시기 */
+.status-indicator {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px;
+  background-color: var(--bg-primary);
+  border-radius: 8px;
+  margin-top: 10px;
+  transition: background-color 0.3s;
+}
+
+.indicator-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+
+.indicator-dot.active,
+.indicator-dot.running {
+  background-color: #4caf50;
+}
+
+.indicator-dot.inactive {
+  background-color: #f44336;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.status-indicator span {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+/* 정보 섹션 */
+.info-section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.info-card {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 12px;
+  padding: 25px;
+  text-align: center;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s;
+}
+
+[data-theme="dark"] .info-card {
+  background: rgba(22, 33, 62, 0.95);
+}
+
+.info-card h3 {
+  font-size: 1.2rem;
+  color: var(--text-primary);
+  margin-bottom: 10px;
+}
+
+.info-card p {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+  .dashboard-container {
+    padding: 20px 15px;
+  }
+
+  .dashboard-header h1 {
+    font-size: 2rem;
+  }
+
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .status-card {
+    padding: 20px;
+  }
+
+  .card-header h2 {
+    font-size: 1.3rem;
+  }
+}
+
