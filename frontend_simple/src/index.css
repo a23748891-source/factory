@@ -1,0 +1,106 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  /* 라이트 모드 색상 */
+  --bg-primary: #F3F4F9;
+  --bg-secondary: #ffffff;
+  --text-primary: #333333;
+  --text-secondary: #666666;
+  --accent-primary: #667eea;
+  --accent-secondary: #764ba2;
+  --accent-red: #ED4B5E;
+  --accent-red-hover: #ff6678;
+  --border-color: #e0e0e0;
+  --shadow: rgba(0, 0, 0, 0.1);
+  --card-bg: #ffffff;
+  --card-shadow: rgba(0, 0, 0, 0.1);
+  --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --gradient-red: linear-gradient(135deg, #ED4B5E 0%, #ff6678 100%);
+}
+
+/* 색상 테마별 그라디언트 */
+[data-color-scheme="purple"] {
+  --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+[data-color-scheme="blue"] {
+  --gradient-primary: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+}
+
+[data-color-scheme="green"] {
+  --gradient-primary: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+}
+
+[data-color-scheme="orange"] {
+  --gradient-primary: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+}
+
+[data-color-scheme="red"] {
+  --gradient-primary: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+}
+
+[data-color-scheme="teal"] {
+  --gradient-primary: linear-gradient(135deg, #30cfd0 0%, #330867 100%);
+}
+
+[data-theme="dark"] {
+  /* 다크 모드 색상 */
+  --bg-primary: #1a1a2e;
+  --bg-secondary: #16213e;
+  --text-primary: #ffffff;
+  --text-secondary: #b0b0b0;
+  --accent-primary: #7c3aed;
+  --accent-secondary: #a855f7;
+  --accent-red: #ff6b7a;
+  --accent-red-hover: #ff8a95;
+  --border-color: #2d3748;
+  --shadow: rgba(0, 0, 0, 0.3);
+  --card-bg: #16213e;
+  --card-shadow: rgba(0, 0, 0, 0.5);
+  --gradient-primary: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  --gradient-red: linear-gradient(135deg, #2d1b2e 0%, #3d1f2e 100%);
+}
+
+/* 다크 모드 + 색상 테마별 그라디언트 */
+[data-theme="dark"][data-color-scheme="purple"] {
+  --gradient-primary: linear-gradient(135deg, #4c1d95 0%, #5b21b6 100%);
+}
+
+[data-theme="dark"][data-color-scheme="blue"] {
+  --gradient-primary: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
+}
+
+[data-theme="dark"][data-color-scheme="green"] {
+  --gradient-primary: linear-gradient(135deg, #065f46 0%, #047857 100%);
+}
+
+[data-theme="dark"][data-color-scheme="orange"] {
+  --gradient-primary: linear-gradient(135deg, #9a3412 0%, #c2410c 100%);
+}
+
+[data-theme="dark"][data-color-scheme="red"] {
+  --gradient-primary: linear-gradient(135deg, #991b1b 0%, #dc2626 100%);
+}
+
+[data-theme="dark"][data-color-scheme="teal"] {
+  --gradient-primary: linear-gradient(135deg, #134e4a 0%, #0f766e 100%);
+}
+
+body {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+

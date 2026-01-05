@@ -1,0 +1,504 @@
+.main-container {
+  min-height: calc(100vh - 80px);
+  background-color: var(--bg-primary);
+  padding-bottom: 60px;
+  transition: background-color 0.3s;
+}
+
+/* Hero Section */
+.hero-section {
+  background: linear-gradient(135deg, #ED4B5E 0%, #ff6678 100%);
+  color: white;
+  padding: 80px 50px;
+  text-align: center;
+}
+
+.hero-title {
+  font-size: 3rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+  animation: fadeInDown 0.8s ease-out;
+}
+
+.hero-subtitle {
+  font-size: 1.3rem;
+  margin-bottom: 50px;
+  opacity: 0.95;
+  animation: fadeInUp 0.8s ease-out;
+}
+
+.hero-stats {
+  display: flex;
+  justify-content: center;
+  gap: 60px;
+  margin-top: 40px;
+  animation: fadeIn 1s ease-out;
+}
+
+.stat-item {
+  text-align: center;
+  min-width: 150px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+}
+
+.stat-number {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.stat-label {
+  font-size: 1rem;
+  opacity: 0.9;
+}
+
+/* Zones Section */
+.zones-section {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 60px 50px;
+}
+
+.section-title {
+  font-size: 2rem;
+  color: var(--accent-red);
+  margin-bottom: 40px;
+  text-align: center;
+  font-weight: 600;
+}
+
+.zones-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 30px;
+}
+
+.zones-grid .zone-card {
+  min-width: 320px;
+}
+
+.zone-card {
+  background: var(--card-bg);
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 0 20px var(--shadow);
+  transition: all 0.3s;
+  border: 3px solid transparent;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+}
+
+.zone-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 30px var(--shadow);
+}
+
+.zone-safe {
+  border-color: #4CAF50;
+}
+
+.zone-alert {
+  border-color: #ED4B5E;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+.zone-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.zone-name {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.status-indicator {
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.danger-light {
+  font-size: 2.5rem;
+  animation: blink 1s ease-in-out infinite;
+  filter: drop-shadow(0 0 10px rgba(237, 75, 94, 0.8));
+}
+
+.safe-light {
+  font-size: 2rem;
+}
+
+@keyframes blink {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.1);
+  }
+}
+
+.zone-area {
+  color: #7369AB;
+  font-size: 1rem;
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+
+.zone-status {
+  margin-top: 20px;
+  padding: 16px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.safe-message {
+  color: #4CAF50;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.alert-message {
+  color: #ED4B5E;
+  font-weight: 600;
+}
+
+.alert-message strong {
+  display: block;
+  font-size: 1.2rem;
+  margin-bottom: 8px;
+}
+
+.detection-time {
+  margin-top: 8px;
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+/* Info Section */
+.info-section {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 40px 50px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+}
+
+.info-card {
+  background: var(--card-bg);
+  border-radius: 12px;
+  padding: 40px;
+  box-shadow: 0 0 20px var(--shadow);
+  text-align: center;
+  transition: transform 0.3s;
+}
+
+.info-card:hover {
+  transform: translateY(-5px);
+}
+
+.info-card h3 {
+  font-size: 1.5rem;
+  color: var(--accent-red);
+  margin-bottom: 16px;
+  font-weight: 600;
+}
+
+.info-card p {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/* 애니메이션 */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(237, 75, 94, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(237, 75, 94, 0.6);
+  }
+}
+
+/* 녹음 섹션 */
+.recording-section {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 40px 50px;
+  background: var(--card-bg);
+  border-radius: 12px;
+  box-shadow: 0 0 20px var(--shadow);
+  margin-bottom: 30px;
+}
+
+.recording-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.record-button {
+  background: linear-gradient(135deg, #ED4B5E 0%, #ff6678 100%);
+  color: white;
+  border: none;
+  padding: 16px 32px;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.3s;
+  box-shadow: 0 4px 15px rgba(237, 75, 94, 0.3);
+}
+
+.record-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(237, 75, 94, 0.4);
+}
+
+.record-button.recording {
+  background: linear-gradient(135deg, #ff9800 0%, #ffb74d 100%);
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+.record-icon {
+  font-size: 1.3rem;
+}
+
+.recording-status {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 20px;
+  background: rgba(237, 75, 94, 0.1);
+  border-radius: 8px;
+  border: 2px solid #ED4B5E;
+}
+
+.recording-indicator {
+  color: #ED4B5E;
+  font-size: 1.2rem;
+  animation: blink 1s ease-in-out infinite;
+}
+
+.recording-time {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #ED4B5E;
+  font-family: 'Courier New', monospace;
+}
+
+.recording-text {
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.recording-result {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 12px 20px;
+  background: rgba(76, 175, 80, 0.1);
+  border-radius: 8px;
+  border: 2px solid #4CAF50;
+}
+
+.recording-success {
+  color: #4CAF50;
+  font-weight: 600;
+}
+
+.download-button {
+  background: #4CAF50;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.download-button:hover {
+  background: #45a049;
+  transform: translateY(-2px);
+}
+
+.recording-info {
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  margin-top: 10px;
+}
+
+/* 사용 방법 섹션 */
+.usage-section {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 60px 50px;
+}
+
+.usage-steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  margin-top: 40px;
+}
+
+.usage-step {
+  background: var(--card-bg);
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 0 20px var(--shadow);
+  display: flex;
+  gap: 20px;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.usage-step:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 30px var(--shadow);
+}
+
+.step-number {
+  width: 50px;
+  height: 50px;
+  background: linear-gradient(135deg, #ED4B5E 0%, #ff6678 100%);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.step-content {
+  flex: 1;
+}
+
+.step-content h3 {
+  font-size: 1.2rem;
+  color: var(--text-primary);
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.step-content p {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+/* 반응형 */
+@media (max-width: 768px) {
+  .hero-section {
+    padding: 50px 30px;
+  }
+
+  .hero-title {
+    font-size: 2rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1.1rem;
+  }
+
+  .hero-stats {
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .zones-section {
+    padding: 40px 20px;
+  }
+
+  .section-title {
+    font-size: 1.6rem;
+  }
+
+  .zones-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .info-section {
+    padding: 30px 20px;
+    grid-template-columns: 1fr;
+  }
+
+  .recording-section {
+    padding: 30px 20px;
+  }
+
+  .recording-controls {
+    flex-direction: column;
+  }
+
+  .usage-section {
+    padding: 40px 20px;
+  }
+
+  .usage-steps {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .usage-step {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .step-number {
+    margin: 0 auto;
+  }
+}
+

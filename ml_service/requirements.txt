@@ -1,0 +1,12 @@
+flask==3.0.0
+flask-cors==4.0.0
+tensorflow==2.15.0
+keras==2.15.0
+numpy==1.24.3
+h5py==3.10.0
+librosa==0.10.1
+scipy==1.11.4
+
+# 참고: TensorFlow는 Python 3.8-3.11까지만 지원합니다.
+# Python 3.14를 사용 중이라면 Python 3.11로 가상환경을 재생성하세요.
+

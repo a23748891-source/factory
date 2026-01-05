@@ -1,0 +1,37 @@
+spring:
+  application:
+    name: factory-system
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/factory?useSSL=false&serverTimezone=Asia/Seoul&characterEncoding=UTF-8&allowPublicKeyRetrieval=true
+    username: root
+    password: 1234
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      connection-timeout: 30000
+      maximum-pool-size: 10
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.MySQLDialect
+  sql:
+    init:
+      mode: never  # schema.sql, data.sql 자동 실행 비활성화 (수동 실행 권장)
+      # mode: always  # 자동 실행하려면 이 옵션 사용
+
+server:
+  port: 8080
+
+jwt:
+  secret: your-super-secret-key-change-this-in-production-min-256-bits-required-for-security
+  expiration: 86400000  # 24시간 (밀리초)
+
+# ML 서비스 설정
+ml:
+  service:
+    url: http://localhost:5000  # Python ML 서비스 URL
