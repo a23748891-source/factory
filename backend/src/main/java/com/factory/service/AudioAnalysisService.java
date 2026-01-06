@@ -34,10 +34,10 @@ public class AudioAnalysisService {
     
     // 위험 클래스 인덱스 (실제 위험한 소리만 포함)
     private static final int[] DANGER_CLASSES = {1, 2, 3}; // scream, help, emergency만 위험으로 판단
-    private static final double DANGER_THRESHOLD = 0.7; // 위험 판단 임계값 (70% 이상 확률일 때만 위험으로 판단)
-    private static final double MIN_CONFIDENCE = 0.3; // 최소 신뢰도 (30% 미만이면 정상으로 처리)
-    private static final double NORMAL_CLASS_THRESHOLD = 0.5; // 정상 클래스 확률 임계값 (50% 이상이면 정상)
-    private static final double NORMAL_CLASS_MIN = 0.25; // 정상 클래스 최소 확률 (25% 미만이면 위험 가능성 높음)
+    private static final double DANGER_THRESHOLD = 0.85; // 위험 판단 임계값 (85% 이상 확률일 때만 위험으로 판단) - 일반 대화 오감지 방지
+    private static final double MIN_CONFIDENCE = 0.4; // 최소 신뢰도 (40% 미만이면 정상으로 처리) - 더 엄격하게
+    private static final double NORMAL_CLASS_THRESHOLD = 0.4; // 정상 클래스 확률 임계값 (40% 이상이면 정상) - 더 관대하게
+    private static final double NORMAL_CLASS_MIN = 0.15; // 정상 클래스 최소 확률 (15% 미만이면 위험 가능성 높음) - 더 엄격하게
     
     /**
      * 오디오 데이터를 분석하여 위험 여부를 판단합니다.
@@ -114,20 +114,27 @@ public class AudioAnalysisService {
             // 2. 위험 클래스이면서 확률이 임계값 이상일 때만 위험으로 판단
             else if (isDangerClass(predictedClass)) {
                 // 위험 클래스인 경우, 다음 조건을 모두 만족해야 위험으로 판단:
-                // - 위험 클래스 확률이 임계값(70%) 이상
-                // - 정상 클래스 확률이 25% 미만 (정상 소리가 거의 없을 때만)
-                if (normalClassProbability < NORMAL_CLASS_MIN && maxProbability >= DANGER_THRESHOLD) {
+                // - 위험 클래스 확률이 임계값(85%) 이상 (일반 대화 오감지 방지)
+                // - 정상 클래스 확률이 15% 미만 (정상 소리가 거의 없을 때만)
+                // - 위험 클래스 확률이 정상 클래스 확률보다 훨씬 높아야 함 (최소 3배 이상)
+                double dangerToNormalRatio = maxProbability / (normalClassProbability + 0.01); // 0으로 나누기 방지
+                
+                if (normalClassProbability < NORMAL_CLASS_MIN && 
+                    maxProbability >= DANGER_THRESHOLD && 
+                    dangerToNormalRatio >= 3.0) { // 위험 확률이 정상 확률보다 3배 이상 높을 때만
                     isDangerous = true;
-                    log.warn("⚠️ 위험 감지: 클래스={} ({}), 확률={}%, 정상 확률={}%", 
+                    log.warn("⚠️ 위험 감지: 클래스={} ({}), 확률={}%, 정상 확률={}%, 비율={}", 
                         predictedClass, getClassLabel(predictedClass), 
                         String.format("%.2f", maxProbability * 100), 
-                        String.format("%.2f", normalClassProbability * 100));
+                        String.format("%.2f", normalClassProbability * 100),
+                        String.format("%.2f", dangerToNormalRatio));
                 } else {
                     isDangerous = false;
-                    log.info("위험 클래스이지만 조건 미충족으로 정상 처리: 위험 클래스={} ({}), 위험 확률={}%, 정상 확률={}%, 임계값={}%", 
+                    log.info("위험 클래스이지만 조건 미충족으로 정상 처리: 위험 클래스={} ({}), 위험 확률={}%, 정상 확률={}%, 비율={}, 임계값={}%", 
                         predictedClass, getClassLabel(predictedClass), 
                         String.format("%.2f", maxProbability * 100), 
-                        String.format("%.2f", normalClassProbability * 100), 
+                        String.format("%.2f", normalClassProbability * 100),
+                        String.format("%.2f", dangerToNormalRatio),
                         String.format("%.2f", DANGER_THRESHOLD * 100));
                 }
             } else {
