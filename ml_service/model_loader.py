@@ -9,8 +9,8 @@ from tensorflow import keras
 from tensorflow.keras.models import load_model
 import librosa
 
-# 모델 파일 경로
-MODEL_PATH = os.path.join(os.path.dirname(__file__), 'models', 'final_model.h5')
+# 모델 파일 경로 (사용자가 추가한 final.h5 사용)
+MODEL_PATH = os.path.join(os.path.dirname(__file__), 'models', 'final.h5')
 
 # 전역 변수로 모델 저장 (한 번만 로드)
 _model = None
