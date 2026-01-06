@@ -54,9 +54,6 @@ function Register() {
 
   return (
     <div className="auth-container">
-      <button className="back-to-main" onClick={() => navigate('/')}>
-        ← 메인으로
-      </button>
       <div className="auth-box">
         <h1>회원가입</h1>
         <p className="subtitle">새 계정을 만드세요</p>

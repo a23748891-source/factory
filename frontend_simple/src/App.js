@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { RecordingProvider } from './contexts/RecordingContext';
 import Main from './pages/Main';
 import Login from './pages/Login';
@@ -22,9 +22,22 @@ function App() {
         <div className="app">
           <Navbar />
           <Routes>
-          <Route path="/" element={<Main />} />
+          <Route 
+            path="/" 
+            element={
+              localStorage.getItem('token') ? <Navigate to="/main" replace /> : <Navigate to="/login" replace />
+            } 
+          />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route
+            path="/main"
+            element={
+              <PrivateRoute>
+                <Main />
+              </PrivateRoute>
+            }
+          />
           <Route
             path="/home"
             element={

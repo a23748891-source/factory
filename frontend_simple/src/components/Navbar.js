@@ -130,7 +130,7 @@ function Navbar() {
 
   const handleLogout = () => {
     localStorage.removeItem('token');
-    navigate('/');
+    navigate('/login');
   };
 
   // 로그인 페이지나 회원가입 페이지에서는 네비게이션 바를 보여주지 않음
@@ -168,7 +168,7 @@ function Navbar() {
                   ⏹️ 녹음 중지 ({Math.floor(recordingTime / 60)}:{(recordingTime % 60).toString().padStart(2, '0')})
                 </button>
               )}
-              <button onClick={() => navigate('/')} className="nav-btn">
+              <button onClick={() => navigate('/main')} className="nav-btn">
                 홈
               </button>
               <button onClick={() => navigate('/events')} className="nav-btn">

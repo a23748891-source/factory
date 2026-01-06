@@ -26,7 +26,7 @@ function Login() {
 
     try {
       await login(formData);
-      navigate('/home');
+      navigate('/main');
     } catch (err) {
       setError(err.response?.data?.message || '로그인에 실패했습니다');
     } finally {
@@ -36,9 +36,6 @@ function Login() {
 
   return (
     <div className="auth-container">
-      <button className="back-to-main" onClick={() => navigate('/')}>
-        ← 메인으로
-      </button>
       <div className="auth-box">
         <h1>로그인</h1>
         <p className="subtitle">공장 관리 시스템</p>
