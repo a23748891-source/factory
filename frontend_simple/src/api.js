@@ -113,16 +113,6 @@ export const getSystemInfo = async () => {
   return response.data;
 };
 
-// AI 모델 관련 API
-export const getModelInfo = async () => {
-  const response = await api.get('/api/ml/model/info');
-  return response.data;
-};
-
-export const predictML = async (data) => {
-  const response = await api.post('/api/ml/predict', { data });
-  return response.data;
-};
 
 // 오디오 분석 API
 export const analyzeAudio = async (audioData, sampleRate = 16000, duration = 1000) => {
@@ -201,6 +191,26 @@ export const getNotificationSettings = async () => {
 
 export const updateNotificationSettings = async (settings) => {
   const response = await api.put('/notification-settings', settings);
+  return response.data;
+};
+
+// 저장 설정 API
+export const getStorageSettings = async () => {
+  const response = await api.get('/storage/settings');
+  return response.data;
+};
+
+export const saveStorageSettings = async (settings) => {
+  const response = await api.post('/storage/settings', settings);
+  return response.data;
+};
+
+// 오디오 파일 저장 API
+export const saveAudioFile = async (audioData, fileName) => {
+  const response = await api.post('/api/audio-files/save', {
+    audioData: audioData,
+    fileName: fileName
+  });
   return response.data;
 };
 

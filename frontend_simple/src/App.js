@@ -11,7 +11,6 @@ import Events from './pages/Events';
 import Search from './pages/Search';
 import ThemeSettings from './pages/ThemeSettings';
 import Admin from './pages/Admin';
-import AIPrediction from './pages/AIPrediction';
 import Navbar from './components/Navbar';
 import PrivateRoute from './components/PrivateRoute';
 import './App.css';
@@ -79,14 +78,6 @@ function App() {
             element={
               <PrivateRoute>
                 <Admin />
-              </PrivateRoute>
-            }
-          />
-          <Route
-            path="/ai-prediction"
-            element={
-              <PrivateRoute>
-                <AIPrediction />
               </PrivateRoute>
             }
           />

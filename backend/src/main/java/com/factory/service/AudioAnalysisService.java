@@ -114,8 +114,8 @@ public class AudioAnalysisService {
             // 2. 위험 클래스이면서 확률이 임계값 이상일 때만 위험으로 판단
             else if (isDangerClass(predictedClass)) {
                 // 위험 클래스인 경우, 다음 조건을 모두 만족해야 위험으로 판단:
-                // - 위험 클래스 확률이 임계값(80%) 이상
-                // - 정상 클래스 확률이 30% 미만 (정상 소리가 거의 없을 때만)
+                // - 위험 클래스 확률이 임계값(70%) 이상
+                // - 정상 클래스 확률이 25% 미만 (정상 소리가 거의 없을 때만)
                 if (normalClassProbability < NORMAL_CLASS_MIN && maxProbability >= DANGER_THRESHOLD) {
                     isDangerous = true;
                     log.warn("⚠️ 위험 감지: 클래스={} ({}), 확률={}%, 정상 확률={}%", 

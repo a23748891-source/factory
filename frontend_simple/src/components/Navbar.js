@@ -171,9 +171,6 @@ function Navbar() {
               <button onClick={() => navigate('/')} className="nav-btn">
                 홈
               </button>
-              <button onClick={() => navigate('/ai-prediction')} className="nav-btn">
-                🤖 AI 예측
-              </button>
               <button onClick={() => navigate('/events')} className="nav-btn">
                 이벤트
               </button>

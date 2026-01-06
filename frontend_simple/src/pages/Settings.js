@@ -5,7 +5,9 @@ import {
   saveMicrophoneSettings, 
   getAvailableAudioDevices,
   getNotificationSettings,
-  updateNotificationSettings
+  updateNotificationSettings,
+  getStorageSettings,
+  saveStorageSettings
 } from '../api';
 import './Settings.css';
 
@@ -20,14 +22,7 @@ function Settings() {
     },
     storage: {
       enabled: true,
-      retentionDays: 30,
-      maxStorageGB: 10,
-      autoCleanup: true
-    },
-    system: {
-      autoStart: true,
-      startOnBoot: true,
-      backgroundMode: true
+      retentionDays: 30
     }
   });
 
@@ -48,6 +43,7 @@ function Settings() {
     loadSettings();
     loadAudioDevices();
     loadNotificationSettings();
+    loadStorageSettings();
   }, []);
 
   const loadSettings = async () => {
@@ -98,6 +94,23 @@ function Settings() {
     }
   };
 
+  const loadStorageSettings = async () => {
+    try {
+      const storageSettings = await getStorageSettings();
+      if (storageSettings) {
+        setSettings(prev => ({
+          ...prev,
+          storage: {
+            enabled: storageSettings.autoSaveEnabled ?? prev.storage.enabled,
+            retentionDays: storageSettings.retentionDays ?? prev.storage.retentionDays
+          }
+        }));
+      }
+    } catch (error) {
+      console.error('저장 설정 로드 실패:', error);
+    }
+  };
+
   const handleSave = async () => {
     try {
       await saveMicrophoneSettings({
@@ -105,6 +118,10 @@ function Settings() {
         outputDevice: settings.microphone.outputDevice,
         inputVolume: settings.microphone.inputVolume,
         outputVolume: settings.microphone.outputVolume
+      });
+      await saveStorageSettings({
+        autoSaveEnabled: settings.storage.enabled,
+        retentionDays: settings.storage.retentionDays
       });
       setSaved(true);
       setTimeout(() => setSaved(false), 3000);
@@ -162,8 +179,8 @@ function Settings() {
   return (
     <div className="settings-container">
       <div className="settings-header">
-        <h1>환경 설정</h1>
-        <p className="settings-subtitle">시스템 설정을 관리하세요</p>
+        <h1>⚙️ 환경 설정</h1>
+        <p className="settings-subtitle">시스템 설정을 관리하고 개인화하세요</p>
       </div>
 
       <div className="settings-content">
@@ -273,7 +290,7 @@ function Settings() {
             <div className="setting-item">
               <div className="setting-label">
                 <span>자동 저장 활성화</span>
-                <span className="setting-desc">음성 파일 자동 저장 기능</span>
+                <span className="setting-desc">녹음 중지 시 음성 파일이 자동으로 서버에 저장됩니다</span>
               </div>
               <label className="toggle-switch">
                 <input
@@ -287,8 +304,8 @@ function Settings() {
 
             <div className="setting-item">
               <div className="setting-label">
-                <span>저장 기간 (일)</span>
-                <span className="setting-desc">음성 파일을 보관할 기간</span>
+                <span>파일 보관 기간</span>
+                <span className="setting-desc">설정한 기간이 지난 파일은 자동으로 삭제됩니다 (매일 새벽 2시)</span>
               </div>
               <div className="number-input-container">
                 <input
@@ -301,39 +318,6 @@ function Settings() {
                 />
                 <span className="input-unit">일</span>
               </div>
-            </div>
-
-            <div className="setting-item">
-              <div className="setting-label">
-                <span>최대 저장 용량 (GB)</span>
-                <span className="setting-desc">최대 저장 가능한 용량</span>
-              </div>
-              <div className="number-input-container">
-                <input
-                  type="number"
-                  min="1"
-                  max="1000"
-                  value={settings.storage.maxStorageGB}
-                  onChange={(e) => handleChange('storage', 'maxStorageGB', parseInt(e.target.value))}
-                  className="number-input"
-                />
-                <span className="input-unit">GB</span>
-              </div>
-            </div>
-
-            <div className="setting-item">
-              <div className="setting-label">
-                <span>자동 정리</span>
-                <span className="setting-desc">기간 초과 파일 자동 삭제</span>
-              </div>
-              <label className="toggle-switch">
-                <input
-                  type="checkbox"
-                  checked={settings.storage.autoCleanup}
-                  onChange={(e) => handleChange('storage', 'autoCleanup', e.target.checked)}
-                />
-                <span className="toggle-slider"></span>
-              </label>
             </div>
           </div>
         </div>
@@ -381,60 +365,6 @@ function Settings() {
           </div>
         </div>
 
-        {/* 시스템 설정 */}
-        <div className="settings-section">
-          <div className="section-header">
-            <h2>⚙️ 시스템 설정</h2>
-          </div>
-          
-          <div className="settings-group">
-            <div className="setting-item">
-              <div className="setting-label">
-                <span>서버 재부팅 시 자동 실행</span>
-                <span className="setting-desc">시스템 재부팅 후 자동으로 서비스를 시작합니다</span>
-              </div>
-              <label className="toggle-switch">
-                <input
-                  type="checkbox"
-                  checked={settings.system.startOnBoot}
-                  onChange={(e) => handleChange('system', 'startOnBoot', e.target.checked)}
-                />
-                <span className="toggle-slider"></span>
-              </label>
-            </div>
-
-            <div className="setting-item">
-              <div className="setting-label">
-                <span>자동 시작</span>
-                <span className="setting-desc">애플리케이션 실행 시 자동으로 서비스를 시작합니다</span>
-              </div>
-              <label className="toggle-switch">
-                <input
-                  type="checkbox"
-                  checked={settings.system.autoStart}
-                  onChange={(e) => handleChange('system', 'autoStart', e.target.checked)}
-                />
-                <span className="toggle-slider"></span>
-              </label>
-            </div>
-
-            <div className="setting-item">
-              <div className="setting-label">
-                <span>백그라운드 모드</span>
-                <span className="setting-desc">창을 닫아도 백그라운드에서 계속 실행</span>
-              </div>
-              <label className="toggle-switch">
-                <input
-                  type="checkbox"
-                  checked={settings.system.backgroundMode}
-                  onChange={(e) => handleChange('system', 'backgroundMode', e.target.checked)}
-                />
-                <span className="toggle-slider"></span>
-              </label>
-            </div>
-          </div>
-        </div>
-
         {/* 저장 버튼 */}
         <div className="settings-actions">
           <button onClick={handleSave} className="save-button">
@@ -448,17 +378,21 @@ function Settings() {
         {/* 추가 설정 링크 */}
         <div className="additional-settings">
           <div className="profile-link-section">
-            <button onClick={() => navigate('/profile')} className="profile-link-button">
-              👤 개인정보
-            </button>
+            <div className="link-icon">👤</div>
+            <h3>개인정보</h3>
             <p className="profile-link-desc">회원 정보를 확인하고 수정할 수 있습니다</p>
+            <button onClick={() => navigate('/profile')} className="profile-link-button">
+              이동하기
+            </button>
           </div>
 
           <div className="profile-link-section">
-            <button onClick={() => navigate('/theme')} className="profile-link-button">
-              🎨 테마 설정
-            </button>
+            <div className="link-icon">🎨</div>
+            <h3>테마 설정</h3>
             <p className="profile-link-desc">다크모드 및 색상 테마를 변경할 수 있습니다</p>
+            <button onClick={() => navigate('/theme')} className="profile-link-button">
+              이동하기
+            </button>
           </div>
         </div>
       </div>
